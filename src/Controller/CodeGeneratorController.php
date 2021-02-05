@@ -30,14 +30,8 @@ class CodeGeneratorController extends AbstractController
             $csvArray = $randomCodeHandler->generateRandomCodeCsv($awardsArray);
             $CodeDatabaseResponse = $randomCodeHandler->insertRandomCodeDatabase($csvArray);
 
-            if(!empty($CodeDatabaseResponse)) {
-                $message = "Succesful code generation";
-            } else {
-                $message = "Something went wrong. Check logs";
-            }
-
             return $this->render('code_generator/success.html.twig', [
-                'messsage' => $message,
+                'messsage' => (!empty($CodeDatabaseResponse)) ? "Succesful code generation" : "Something went wrong. Check logs",
             ]);
         }
 

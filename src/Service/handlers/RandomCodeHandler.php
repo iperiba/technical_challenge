@@ -39,7 +39,7 @@ class RandomCodeHandler
         ini_set('memory_limit', '-1');
 
         foreach ($awardsArray as $award) {
-                $header = ['id', 'award_id', 'awarded', 'created', 'updated'];
+                $header = ['id', 'award_id', 'awarded'];
                 $records = $this->generateArrayData($award[0], $award[1]);
                 $writer = Writer::createFromPath($this->locationNewCsv . $award[0] . '_file.csv', 'w');
                 $writer->insertOne($header);
