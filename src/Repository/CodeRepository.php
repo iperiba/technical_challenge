@@ -20,6 +20,11 @@ class CodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Code::class);
     }
 
+    /**
+     * @param string $routeFile
+     * @param string $database
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function insertRandomCode(string $routeFile, string $database)
     {
         $conn = $this->getEntityManager()->getConnection();

@@ -22,7 +22,12 @@ class AwardHandler
         $this->nameCsv = $nameCsv;
     }
 
-    public function registerAwards()
+    /**
+     * @return array
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function registerAwards(): array
     {
         $records = $this->obtainDataFromCsv();
         $awardsArray = array();
@@ -34,6 +39,10 @@ class AwardHandler
         return $awardsArray;
     }
 
+    /**
+     * @return object
+     * @throws \League\Csv\Exception
+     */
     public function obtainDataFromCsv(): object
     {
         $csv = Reader::createFromPath($this->locationCsv.$this->nameCsv, 'r');

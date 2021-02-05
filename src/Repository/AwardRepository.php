@@ -23,6 +23,12 @@ class AwardRepository extends ServiceEntityRepository
         $this->logger = $logger;
     }
 
+    /**
+     * @param array $record
+     * @return array
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function insertFromCsv(array $record): array
     {
         $entityManager = $this->getEntityManager();
