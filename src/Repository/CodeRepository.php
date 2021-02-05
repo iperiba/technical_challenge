@@ -20,7 +20,7 @@ class CodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Code::class);
     }
 
-    public function insertRandomCode(string $routeFile, string $database, LoggerInterface $logger)
+    public function insertRandomCode(string $routeFile, string $database)
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = "LOAD DATA INFILE '$routeFile' 

@@ -28,27 +28,23 @@ class RandomCodeHandler
     public function insertRandomCodeDatabase(array $generatedCsv)
     {
         foreach ($generatedCsv as $csv) {
-            $this->codeRepository->insertRandomCode($this->locationNewCsv.$csv, $this->codeDatabase, $this->logger);
+            $this->codeRepository->insertRandomCode($this->locationNewCsv.$csv, $this->codeDatabase);
         }
     }
 
     public function generateRandomCodeCsv(array $awardsArray): array
     {
         $arrayGeneratedCSV = array();
-        $primerId = $awardsArray[0][0];
-        $segundoId = $awardsArray[1][0];
 
         ini_set('memory_limit', '-1');
 
         foreach ($awardsArray as $award) {
-            if ($award[0] === $primerId || $award[0] === $segundoId) {
                 $header = ['id', 'award_id', 'awarded', 'created', 'updated'];
                 $records = $this->generateArrayData($award[0], $award[1]);
                 $writer = Writer::createFromPath($this->locationNewCsv . $award[0] . '_file.csv', 'w');
                 $writer->insertOne($header);
                 $writer->insertAll($records);
                 $arrayGeneratedCSV[] = $this->locationNewCsv . $award[0] . '_file.csv';
-            }
         }
 
         return $arrayGeneratedCSV;
